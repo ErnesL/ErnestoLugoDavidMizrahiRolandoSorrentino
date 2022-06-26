@@ -49,8 +49,8 @@ public class Metodos {
         
         
         System.out.println(articulo.getTitulo());
-        int indec = 279 % 11;
-        System.out.println(indec);
+        int index = ascii % 13;
+        System.out.println(index);
         return 0;
     
         
