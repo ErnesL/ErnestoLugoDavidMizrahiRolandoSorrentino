@@ -38,55 +38,62 @@ public class ManejoArchivo {
     
        
             Scanner scanner = new Scanner(resumen);
-          
+            int i = 0;
+            String[] arrayCampos = new String[15];
             String linea = "";
-            String string = "";
-
-
+            Lista<String> autores = new Lista<>();
+            Lista<String> palabrasClave = new Lista<>();
             while(scanner.hasNext()){
-            
+//                 i++;
+//                 arrayCampos = new String[i+1];
                 linea = scanner.nextLine();
-                if(linea.equals("Autores"))break; 
 
-                articulo.setTitulo(linea);
-//                System.out.println(articulo.getTitulo());
-//            while(scanner.hasNext()){
-//            
-//                linea = scanner.nextLine();
-//                string+= linea;
-//                if(linea.equals("Resumen"))break;
-//
-//
-//                    
-//                }
-//
-//                
+                arrayCampos[i] =linea;
+                i++;
+                    
+                }
+                               
+                articulo.setTitulo(arrayCampos[0]);
+//                for (int j = 0; j < arrayCampos.length; j++) {
+//                    System.out.println(arrayCampos[j]);
 //            
 //        }
-            
-//                Lista<String> lista = new Lista<>();
-//                string = string.replace(" ", "/");
-//                String[] stringArray = string.split("/");
-//                //System.out.println(stringArray.length);
-//                for (int i = 0; i < stringArray.length; i++) {
-//                    //String string1 = stringArray[i];
-//                    if(stringArray[i] == "Raquel"){System.out.println(i);
-//}//else{System.out.println("hoola");}
-//
-//                    if(i == 0){
-//                    
-//                        stringArray[i] = stringArray[0].substring(7);
-//                    }
-
+               
+                
+                int j = 0;
+                while(j < arrayCampos.length){
+                
+                    if(arrayCampos[j] != null){
                     
+                        if(arrayCampos[j].contains("Autores")){
+                        
+                            while(!arrayCampos[j+1].contains("Resumen")){
+                            
+                                autores.agregarElemento(arrayCampos[j+1]);
+                                j++;
+                            }
+                        }
+                        else if(arrayCampos[j].contains("Resumen")){
+                        
+                            articulo.setCuerpo(arrayCampos[j+1]);
+//                            System.out.println(articulo.getCuerpo());
+                        }else if(arrayCampos[j].contains("Palabras clave"))break;
+                    }j++;
+                }
+                autores.imprimirValores();
+                articulo.setAutores(autores);
+                 String keyWords = arrayCampos[j].substring(17).replace(", ", "/");
+
+                String[] keyWordsArr = keyWords.split("/");
+                for (int k = 0; k < keyWordsArr.length; k++) {
+                        palabrasClave.agregarElemento(keyWordsArr[k]);
             
         }
-//                lista.imprimirValores();
+                palabrasClave.imprimirValores();
+                articulo.setPalabrasClave(palabrasClave);
+        }
 
-//               hashFunc(articulo);
-           
-//    }
-    }
+      
     public static void eliminarArchivo(){
     File f0 = new File("test//resumenes.txt");   
     if (f0.delete()) {   
@@ -98,5 +105,6 @@ public class ManejoArchivo {
     }
 }
         
+
         
 
