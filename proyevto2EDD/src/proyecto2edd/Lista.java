@@ -6,118 +6,116 @@ import javax.swing.JOptionPane;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author davidmizrahi
  * @param <T>
  */
-public class Lista <T>{
-  //Campos de la clase
+public class Lista<T> {
+    //Campos de la clase
+
     private Nodo<T> pFirst;
-  
+
     private int size;
-  
+
     /**
-     *Constructor de la clase
+     * Constructor de la clase
      */
-    public Lista(){
-       
+    public Lista() {
+
         this.pFirst = null;
-        
+
         this.size = 0;
-  }
-    
+    }
+
     /**
      *
      * @return valor de tipo boolean
      */
-    public boolean esVacio(){
-       
+    public boolean esVacio() {
+
         return pFirst == null;
     }
-    
+
     /**
      *
      * @param x
      */
-    public void agregarElemento(T x){
-        
+    public void agregarElemento(T x) {
+
         Nodo<T> node = new Nodo<>();
-        
+
         node.setInfo(x);
-        
-        if(esVacio()){
-        
+
+        if (esVacio()) {
+
             pFirst = node;
-        
-        }else{
-            
+
+        } else {
+
             Nodo aux = pFirst;
-            
-            while(aux.getpNext() != null){
-            
+
+            while (aux.getpNext() != null) {
+
                 aux = aux.getpNext();
             }
             aux.setpNext(node);
-            
-        }
-        
-                size ++;
 
-    
+        }
+
+        size++;
+
     }
-    
+
     /**
      *
      * @param x
-     * @return indica la posicion de cierto elemento en la lista retorno de tipo entero
+     * @return indica la posicion de cierto elemento en la lista retorno de tipo
+     * entero
      */
-    public int buscarPosicion(T x){
-    
+    public int buscarPosicion(T x) {
+
         int posicion = -1;
-        
+
         Nodo<T> aux = pFirst;
-        
-        while(aux != null){
-            
-            if(aux.getInfo().equals(x)){
-            
-                
+
+        while (aux != null) {
+
+            if (aux.getInfo().equals(x)) {
+
                 return posicion;
-                
-            }posicion++;
-            
+
+            }
+            posicion++;
+
             aux = aux.getpNext();
         }
         return -1;
-        
+
     }
 
     /**
      *
      * @param x
      */
-    public void agregarAlInicio(T x){
+    public void agregarAlInicio(T x) {
         Nodo<T> node = new Nodo<>();
-        
+
         node.setInfo(x);
-        
-        if (esVacio()){
+
+        if (esVacio()) {
             pFirst = node;
             size++;
 
-        }else{
-           
+        } else {
+
             Nodo<T> aux = pFirst;
-            
+
             node.setpNext(aux);
-            
 
             pFirst = node;
             size++;
 
-      
         }
     }
 
@@ -126,22 +124,21 @@ public class Lista <T>{
      * @param referencia
      * @return det ipo booleano, saber si un nodo se encuentra en la lista
      */
-    public boolean Buscar(T referencia){
-    
+    public boolean Buscar(T referencia) {
+
         Nodo<T> node = new Nodo<>();
-        
+
         boolean found = false;
-    
+
         node.setInfo(referencia);
-    
+
         Nodo<T> aux = pFirst;
-        
-    
-        while(aux.getInfo() != node.getInfo()){
-        
+
+        while (aux.getInfo() != node.getInfo()) {
+
             aux = aux.getpNext();
-            if(aux.getInfo() == node.getInfo()) {
-            
+            if (aux.getInfo() == node.getInfo()) {
+
                 found = true;
                 break;
             }
@@ -182,46 +179,47 @@ public class Lista <T>{
      * @param value
      * @param posicion
      */
-    public void insertar(T value, int posicion){
-        
+    public void insertar(T value, int posicion) {
+
         Nodo<T> nodo = new Nodo<>();
-        
+
         nodo.setInfo(value);
-        
-        if (posicion == 0 || esVacio()){
+
+        if (posicion == 0 || esVacio()) {
             nodo = pFirst;
             pFirst = nodo;
-           // System.out.println(nodo.getInfo());
-        }else{
-        
+            // System.out.println(nodo.getInfo());
+        } else {
+
             Nodo<T> aux = pFirst;
-        
-        for(int i = 0; i < posicion - 1; i++){
-            
-            aux = aux.getpNext();
+
+            for (int i = 0; i < posicion - 1; i++) {
+
+                aux = aux.getpNext();
+            }
+            nodo.setpNext(aux.getpNext());
+
+            aux.setpNext(nodo);
         }
-        nodo.setpNext(aux.getpNext());
-        
-        aux.setpNext(nodo);
-        }
-        
-        size ++;
+
+        size++;
     }
-    
+
     /**
      * Se elimina el primer elemento de la lista
      */
-    public void eliminarPrimero(){
-        
-        
-        if (!esVacio()){
-       
+    public void eliminarPrimero() {
+
+        if (!esVacio()) {
+
             pFirst = pFirst.getpNext();
-       
+
             size = size - 1;
-        }else{System.out.print("La lista esta vacia");}
-       
-  }
+        } else {
+            System.out.print("La lista esta vacia");
+        }
+
+    }
 
     /**
      *
@@ -238,26 +236,26 @@ public class Lista <T>{
     public void setpFirst(Nodo<T> pFirst) {
         this.pFirst = pFirst;
     }
-    
+
     /**
      *
      * @param nodo
      */
-    public void eliminarElemento(Nodo<T> nodo){
+    public void eliminarElemento(Nodo<T> nodo) {
         //Nodo node = new Nodo();
-        
+
         //node.setInfo(value);
-        if (nodo == pFirst){
-        pFirst = pFirst.getpNext();
+        if (nodo == pFirst) {
+            pFirst = pFirst.getpNext();
         }
-        
+
         Nodo<T> aux = pFirst;
-        
-        if (!esVacio()){
-            if(Buscar(nodo.getInfo())){
-            while(aux.getpNext().getInfo() != nodo.getInfo()){
-        
-            aux = aux.getpNext();
+
+        if (!esVacio()) {
+            if (Buscar(nodo.getInfo())) {
+                while (aux.getpNext().getInfo() != nodo.getInfo()) {
+
+                    aux = aux.getpNext();
 //            if (Buscar(nodo.getInfo())){
 //                Nodo aux = pFirst;
 //                while(aux.getpNext().getInfo() != nodo.getInfo()){
@@ -266,33 +264,36 @@ public class Lista <T>{
 //                }
 //                aux.setpNext(nodo.getpNext());
 //                
-                
-            }      aux.setpNext(aux.getpNext().getpNext());          
-            size = size - 1;
-            
-            }else{System.out.println("No existe el valor que desea eliminar");}
+
+                }
+                aux.setpNext(aux.getpNext().getpNext());
+                size = size - 1;
+
+            } else {
+                System.out.println("No existe el valor que desea eliminar");
+            }
         }
     }
-    
-    /**
-     *Elimina el ultimo elemento de la lista
-     */
-    public void eliminarUltimo(){
-    
-        if(!esVacio()){
-    
-            Nodo<T> aux = pFirst;
-    //Nodo ultimo = null;
-    while(aux.getpNext().getpNext() != null){
-    
-        aux = aux.getpNext();
-    }
-    
-    aux.getpNext().getpNext();
-    
-    size = size - 1;
 
-    }
+    /**
+     * Elimina el ultimo elemento de la lista
+     */
+    public void eliminarUltimo() {
+
+        if (!esVacio()) {
+
+            Nodo<T> aux = pFirst;
+            //Nodo ultimo = null;
+            while (aux.getpNext().getpNext() != null) {
+
+                aux = aux.getpNext();
+            }
+
+            aux.getpNext().getpNext();
+
+            size = size - 1;
+
+        }
     }
 //    public void eliminarPosicion(int posicion){
 //        if(posicion == 0){
@@ -332,42 +333,40 @@ public class Lista <T>{
      *
      * @return retorna un tipo de dato entero referente al tamaño de la lista
      */
-    public int Size(){
+    public int Size() {
         return size;
     }
 
     /**
-     *Imprime los elementos de la lista
+     * Imprime los elementos de la lista
      */
-    public void imprimirValores(){
-    if(!esVacio()){
-        Nodo aux = pFirst;
-        
-        for (int i = 0; i < size; i++){
-            
-            System.out.print(aux.getInfo()+ " ==> ");
-            
-            aux = aux.getpNext();
-        }
-}else{System.out.print("La lista esta vacia");}
+    public void imprimirValores() {
+        if (!esVacio()) {
+            Nodo aux = pFirst;
 
-        
-     
-		
+            for (int i = 0; i < size; i++) {
+
+                System.out.print(aux.getInfo() + " ==> ");
+
+                aux = aux.getpNext();
+            }
+        } else {
+            System.out.print("La lista esta vacia");
         }
-    
+
+    }
+
     /**
-     *Vacia la lista por completo
+     * Vacia la lista por completo
      */
-    public void vaciarLista(){
-    
-    if(!esVacio()){
-    while(pFirst != null){
-        pFirst = pFirst.getpNext();
-        
-    
-    }
-    }
+    public void vaciarLista() {
+
+        if (!esVacio()) {
+            while (pFirst != null) {
+                pFirst = pFirst.getpNext();
+
+            }
+        }
     }
 //    public void Localizar(int x){
 //
@@ -423,6 +422,7 @@ public class Lista <T>{
 
     /**
      * Elimina un Nodo buscandolo por la posicion ingresada por el usuario
+     *
      * @param position
      */
     public void deleteNth(int position) {
@@ -447,92 +447,83 @@ public class Lista <T>{
         size--;
 
     }
-    
+
     /**
      *
      * @param k
      */
-    public void swapNodes(int k){
+    public void swapNodes(int k) {
         Nodo prevNodeAux = null, prevNodeAuxOne = null;
         Lista list = new Lista();
-       
+
         Nodo aux = pFirst;
         int i = 1;
-        while(aux != null){
+        while (aux != null) {
             prevNodeAux = aux;
             aux = aux.getpNext();
             i++;
 
-            if(i == k){
+            if (i == k) {
                 break;
             }
-        
+
         }
 
-        
         Nodo auxOne = pFirst;
         int j = 1;
-        while (auxOne != null){
+        while (auxOne != null) {
             prevNodeAuxOne = auxOne;
             auxOne = auxOne.getpNext();
             j++;
-            if(j == size - (k)){
+            if (j == size - (k)) {
                 break;
             }
         }
-        
+
         System.out.println(aux.getpNext().getInfo());
         System.out.println(auxOne.getpNext().getInfo());
-        
-        if(aux != null && auxOne != null){
-            
-            if(prevNodeAux != null){
-            
-            //prevNodeAux = auxOne;
-            auxOne.setpNext(prevNodeAux.getpNext().getpNext());
-            }else{pFirst = auxOne;}
-            
-            if(prevNodeAuxOne != null){
-             // prevNodeAuxOne = aux;
+
+        if (aux != null && auxOne != null) {
+
+            if (prevNodeAux != null) {
+
+                //prevNodeAux = auxOne;
+                auxOne.setpNext(prevNodeAux.getpNext().getpNext());
+            } else {
+                pFirst = auxOne;
+            }
+
+            if (prevNodeAuxOne != null) {
+                // prevNodeAuxOne = aux;
                 aux.setpNext(prevNodeAuxOne.getpNext().getpNext());
-            }else{pFirst = aux;}
-            
+            } else {
+                pFirst = aux;
+            }
+
         }
-           
-        
+
     }
-    
+
     /**
      *
      * @return tipo de dato Nodo
      */
-    public Nodo invertirLista(){
+    public Nodo invertirLista() {
         Nodo new_head = null;
         Nodo curr = pFirst;
         Nodo prev = null;
         Nodo tmp_curr = null;
-        while(true){
-        tmp_curr = curr.getpNext();
-        curr.setpNext(prev);
-        
-        if(tmp_curr == null){
-            break;
-        }
-        curr = tmp_curr;
+        while (true) {
+            tmp_curr = curr.getpNext();
+            curr.setpNext(prev);
+
+            if (tmp_curr == null) {
+                break;
+            }
+            curr = tmp_curr;
         }
         return curr;
-  
-       }
-              
+
     }
 
-        
-        
-   
-    
-
-
-    
-    
-   
-
+}
